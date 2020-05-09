@@ -8,7 +8,11 @@ def decodes(code,advancekey):
 	decoded_string = ""
 	code_upper = code.upper()
 	decoded_list = split(code)
+	res = advancekey
 
+	while res>26:
+		res = advancekey-26
+		
 	list_alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", 
 	"J", "K","L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 	
@@ -21,11 +25,27 @@ def decodes(code,advancekey):
 		char_to_explore = decoded_list[length_iterator]
 
 		if char_to_explore.isalpha():
+			
+			index_list = list_alphabet.index(char_to_explore) 
+			Resta = len(list_alphabet)-index_list 
+			if res > Resta:
+				Posicion = res-Resta
+				decoded_string = decoded_string + list_alphabet[Posicion]
+		else
+				decode_index = index_list + int(res)
+				decoded_string = decoded_string + list_alphabet[decode_index]
 
-			index_list = list_alphabet.index(char_to_explore)
-			decode_index = index_list + int(advancekey)
-			decoded_string = decoded_string + list_alphabet[decode_index]
-		
+		if char_to_explore.isdigit():
+			
+			index_list = list_number.index(char_to_explore) 
+			Resta = len(list_number)-index_list 
+			if res > Resta:
+				Posicion = res-Resta
+				decoded_string = decoded_string + list_number[Posicion]
+		else
+				decode_index = index_list + int(res)
+				decoded_string = decoded_string + list_number[decode_index]
+
 		length_iterator = length_iterator + 1
 
 	print ("decoded chain: " + decoded_string)
@@ -40,4 +60,3 @@ def main():
 
 if __name__ == "__main__":
 	main()
-
